@@ -1,3 +1,16 @@
+@{%
+const moo = require("moo");
+
+const lexer = moo.compile({
+  ws:     /[ \t\n\v\f]+/,
+  number: /[0-9]+/,
+  word: /[a-z]+/,
+  times:  /\*|x/
+});
+%}
+
+@lexer lexer
+
 Program -> "Program" _ programID __ varDeclaration:? function:+ _ main
 
 main -> "fn" __ "main" "(" parameter ")" (functionType | "void"):? __ "{" __ varDeclaration __ statement:* __ return __ "}"

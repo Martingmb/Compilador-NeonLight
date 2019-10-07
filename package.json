@@ -1,0 +1,29 @@
+{
+  "name": "neonlight-compilador",
+  "version": "0.0.1",
+  "description": "Compilador para el lenguaje NeonLight(basado en Rust)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Martingmb/Compilador-NeonLight.git"
+  },
+  "keywords": [
+    "Compiler",
+    "nearley",
+    "moo",
+    "grammar",
+    "language"
+  ],
+  "author": "Martin Moreno, Daniel Saldaña",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Martingmb/Compilador-NeonLight/issues"
+  },
+  "homepage": "https://github.com/Martingmb/Compilador-NeonLight#readme",
+  "dependencies": {
+    "moo": "^0.5.1"
+  }
+}
