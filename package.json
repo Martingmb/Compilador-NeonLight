@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/Martingmb/Compilador-NeonLight#readme",
   "dependencies": {
-    "moo": "^0.5.1"
+    "moo": "^0.5.1",
+    "nearley": "^2.19.0"
   }
 }

@@ -1,6 +1,6 @@
 program helloworld
 
-fn main(): type {
+fn main(): void {
     var str: string;
     
     print(Hello World);

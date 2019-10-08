@@ -2,55 +2,59 @@
 const moo = require("moo");
 
 const lexer = moo.compile({
-  ws:     /[ \t\n\v\f]+/,
-  number: /[0-9]+/,
-  word: /[a-z]+/,
-  times:  /\*|x/
+    OP: [':', ';', '(', ')', '{','}', '=', '.'],
+    program: "Program",
+    function: "fn",
+    number: /[0-9]+/,
+    word: /[a-zA-Z]+/,
+    times:  /\*|x/,
+    ws:     /[ \t\v\f]+?/,
+    newline: {match: '\n', lineBreaks: true}
 });
 %}
 
 @lexer lexer
 
-Program -> "Program" _ programID __ varDeclaration:? function:+ _ main
+Program -> %program %ws programID %ws varDeclaration:?  main
 
-main -> "fn" __ "main" "(" parameter ")" (functionType | "void"):? __ "{" __ varDeclaration __ statement:* __ return __ "}"
+main -> "fn" %ws "main" "(" parameter ")" (functionType | "void"):? %ws "{"  varDeclaration  statement:*  return "}"
 
-varDeclaration -> (var _):*
+varDeclaration -> (var %ws):*
 
-function -> "fn" __ functionID "(" parameter ")" (functionType | "void"):? __ "{" __ varDeclaration __ statement:* __ return __ "}"
+function -> "fn" %ws functionID "(" parameter ")" (functionType | "void"):? %ws "{" %ws varDeclaration %ws statement:* %ws return %ws "}"
 
 statement -> print | ifStatement | expression | assign | loop | function
 
-assign -> _ id __ "=" __ (expression | constant) _ ";"
+assign -> %ws id %ws "=" %ws (expression | constant) %ws ";"
 
-expression ->  exp (logOP _ exp ):?
+expression ->  exp (logOP %ws exp ):?
 
-exp -> term | (term _ arithOP):+
+exp -> term | (term %ws arithOP):+
 
-term -> factor | (factor _ mdOP):+
+term -> factor | (factor %ws mdOP):+
 
-factor -> _ "(" _ expression _ ")" | _ ("*" | "/"):? number
+factor -> %ws "(" %ws expression %ws ")" | %ws ("*" | "/"):? number
 
 loop -> "for" logOP "{" statement:* "}"
 
-print -> "print" "(" _ (expression | (string | char | number) ) _ ")"
+print -> "print" "(" %ws (expression | (string | char | number) ) %ws ")"
 
-var -> "var" __ ( id ":" __ type ";" | (id _ ",":? ):+ ":" __ type ";" | ":" __ type _ varAssign ";" )  
-    | "var[]" __ id ":" __ type  _ "=" _ "[" int "]" ";"
+var -> "var" %ws ( id ":" %ws type ";" | (id %ws ",":? ):+ ":" %ws type ";" | ":" %ws type %ws varAssign ";" )  
+    | "var[]" %ws id ":" %ws type  %ws "=" %ws "[" int "]" ";"
 
 
-varAssign -> _ "=" _ (expression | constant) 
+varAssign -> %ws "=" %ws (expression | constant) 
     | id "[" int "]" "=" (expression | constant) 
 
-ifStatement -> "if" "(" expression ")" _ "{" _ statement:* _ "}" elifStatement:?
+ifStatement -> "if" "(" expression ")" %ws "{" %ws statement:* %ws "}" elifStatement:?
 
-elifStatement -> _ "elif" "(" expression ")"  _ "{" _ statement:* _ "}" elseStatement:? | elseStatement
+elifStatement -> %ws "elif" "(" expression ")"  %ws "{" %ws statement:* %ws "}" elseStatement:? | elseStatement
 
-elseStatement ->  _ "else" _ "{" _ statement:* _ "}"
+elseStatement ->  %ws "else" %ws "{" %ws statement:* %ws "}"
 
 type -> int | float | string | char | bool
 
-parameter -> (id ":" _ type):? | (id ":" _ type ",":?):+
+parameter -> (id ":" %ws type):? | (id ":" %ws type ",":?):+
 
 logOP -> "<" | ">" | "==" | "!=" | ">=" | "<="
 
@@ -58,9 +62,9 @@ mdOP -> "*" | "/"
 
 arithOP -> "+" | "-"
 
-functionType -> ":" _ type
+functionType -> ":" %ws type
 
-return -> "return" __ expression ";"
+return -> "return" %ws expression ";"
 
 constant -> id | number
 
@@ -70,13 +74,8 @@ programID -> id
 id -> [a-zA-Z]:+
 number -> [0-9]:* | [0-9]:* "." [0-9]:*
 
-int -> [0-9]:* 
-float -> [0-9]:* "." [0-9]:*
-char -> `'` [a-zA-Z] `'`
-string -> "\"" [a-zA-Z]:* "\""
+int -> "int"
+float -> "float"
+char -> "char"
+string -> "string"
 bool -> "true" | "false"
-
-_ -> whitespace:* {% function(d) { return null; } %}
-__ -> whitespace:+ {% function(d) { return null; } %}
-
-whitespace -> [ \t\n\v\f] {% id %}
