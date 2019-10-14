@@ -124,4 +124,5 @@ lexFile();
 
 let cubo = new cuboSemantico();
 
+cubo.setRules();
 cubo.printCombination();

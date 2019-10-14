@@ -187,4 +187,5 @@ var lexFile = function () { return __awaiter(_this, void 0, void 0, function () 
 }); };
 lexFile();
 var cubo = new cuboSemantico_1.cuboSemantico();
+cubo.setRules();
 cubo.printCombination();
