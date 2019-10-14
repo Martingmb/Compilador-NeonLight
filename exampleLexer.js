@@ -48,9 +48,13 @@ var rd = require("readline");
 var moo = require("moo");
 var nearley = require("nearley");
 var grammar = require("./simple");
+var tablaVariables_1 = require("./tablaVariables");
+var directorioProcedimientos_1 = require("./directorioProcedimientos");
 var log = function (item) { console.log(item); };
 var parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar));
 var reader1 = rd.createInterface(fs.createReadStream('./example.nl'));
+var globalVarTable = new tablaVariables_1.tablaVariables();
+var functionTable = new directorioProcedimientos_1.directorioProcedimientos();
 var lexer = moo.compile({
     WS: /[ \t]+/,
     comment: /\/\/.*?$/,
@@ -64,17 +68,40 @@ var lexer = moo.compile({
     vector: ['var[]'],
     variable: ['var'],
     "function": ['fn'],
-    type: ['int', 'float', 'string', 'char', 'bool'],
+    type: ['int', 'float', 'string', 'char', 'bool', 'void'],
     semiColon: ';',
     colon: ':',
+    assign: '=',
     NL: { match: /\n/, lineBreaks: true }
 });
 var lexed = [];
 var parseData = function (syntax) {
     return {
         programID: syntax[1].ProgramID,
-        globalVars: syntax[2].globalVars[0]
+        globalVars: syntax[2].globalVars[0],
+        "function": syntax[3].functions[0]
     };
+};
+var createFunctionTable = function (functionData) {
+    functionData.forEach(function (fn) {
+        var fnInfo = {
+            name: fn.name,
+            parameters: fn.parameters,
+            type: fn.functionType,
+            globalVariables: globalVarTable
+        };
+        functionTable.insert(fnInfo);
+    });
+};
+var createGlobalVariablesTable = function (globalVar) {
+    globalVar.forEach(function (variable) {
+        var varInfo = {
+            varName: variable.varName,
+            type: variable.type,
+            value: variable.value || null
+        };
+        globalVarTable.insert(varInfo);
+    });
 };
 var virtualMachine = function () {
 };
@@ -119,7 +146,7 @@ var readFile = function () { return __awaiter(_this, void 0, void 0, function ()
     });
 }); };
 var lexFile = function () { return __awaiter(_this, void 0, void 0, function () {
-    var lineas, length;
+    var lineas, length, data;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, readFile()];
@@ -146,7 +173,13 @@ var lexFile = function () { return __awaiter(_this, void 0, void 0, function () 
                     }
                 });
                 length = parser.results.length - 1;
-                log(parseData(parser.results[length]));
+                data = parseData(parser.results[0]);
+                createGlobalVariablesTable(data.globalVars);
+                createFunctionTable(data["function"]);
+                log("Tabla de variables globales: ");
+                globalVarTable.printData();
+                log("Directorio de procedimientos: ");
+                functionTable.printData();
                 return [2 /*return*/];
         }
     });

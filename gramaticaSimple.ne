@@ -1,11 +1,23 @@
 
-Program -> "Program"i ProgramID varDeclaration:? {%
+Program -> "Program"i ProgramID varDeclaration:? functionDeclaration:? {%
     function(d) {
         return d;
     }
 %}
 
 ProgramID -> "\"" _string "\"" {% function(d) {return {'ProgramID':d[1]}; } %}
+
+parameter -> idWord ":" type
+    | parameter ","
+
+function -> "fn" _string "(" parameter ")" ":" ("void" | type) {% function(d) {
+    return {
+        'type': 'function',
+        'name': d[1],
+        'parameters': d[3],
+        'functionType': d[6][0]
+    }
+}  %}
 
 varDeclaration -> var:+ {%
     function(d) {
@@ -15,14 +27,22 @@ varDeclaration -> var:+ {%
     }
 %}
 
-var -> "var" _string ":" type (";" | "=" int ";" {% function(d) {
-
-    if(d[5]) {
-        console.log("Si hay declaracion de tipo")
-    } else {
-        return { 'var':'variable', 'varName':d[1], 'type':d[3][0]}; } 
+functionDeclaration -> function:* {%
+    function(d) {
+        return {
+            functions: d
+        }
     }
-    %} 
+%}
+
+var -> "var" _string ":" type (";" | "=" int ";") {% function(d) {
+        if(d[4][0] == '=') {
+            return { 'var':'variable', 'varName':d[1], 'type':d[3][0], 'op':'assign', 'assignVal': d[4][1] }; 
+        } else {
+            return { 'var':'variable', 'varName':d[1], 'type':d[3][0]}; 
+            }
+        }
+        %} 
     | "var[]" _string ":" type "=" "[" int "]" ";" {% function(d) {
        return {
            'var':'array',
@@ -30,14 +50,11 @@ var -> "var" _string ":" type (";" | "=" int ";" {% function(d) {
            'size':d[6],
            'type':d[3][0]
        }
-    }
-    %}
+    }%}
+    
 
-varAssign -> "var" _string ":" type "=" int ";" {% function(d) {
-    return {'var':'variable', 'varName':d[1], 'type':d[3][0], 'value':d[5][0]}
-} %}
 
-id -> [a-zA-Z]:+ {%
+idWord -> [a-zA-Z]:+ {%
     function(d) {
         return d;
     }
