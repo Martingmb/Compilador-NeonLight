@@ -1,3 +1,4 @@
+import { cuboSemantico } from './cuboSemantico';
 import * as fs from "fs";
 import * as rd from 'readline';
 import * as moo from "moo";
@@ -119,3 +120,8 @@ const lexFile = async() => {
 }
 
 lexFile();
+
+
+let cubo = new cuboSemantico();
+
+cubo.printCombination();

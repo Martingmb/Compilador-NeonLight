@@ -43,6 +43,7 @@ var __asyncValues = (this && this.__asyncValues) || function (o) {
 };
 var _this = this;
 exports.__esModule = true;
+var cuboSemantico_1 = require("./cuboSemantico");
 var fs = require("fs");
 var rd = require("readline");
 var moo = require("moo");
@@ -185,3 +186,5 @@ var lexFile = function () { return __awaiter(_this, void 0, void 0, function () 
     });
 }); };
 lexFile();
+var cubo = new cuboSemantico_1.cuboSemantico();
+cubo.printCombination();
