@@ -1,4 +1,3 @@
-import { tablaVariables } from "./tablaVariables";
 import { functionInformation } from "./funcionInterface";
 
 export class directorioProcedimientos {

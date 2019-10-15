@@ -3,11 +3,14 @@ exports.__esModule = true;
 var cuboSemantico = /** @class */ (function () {
     function cuboSemantico() {
         this.types = ['int', 'float', 'string', 'char', 'bool'];
-        this.operators = ['+', '-', '*', '/', '<', '>', '==', '!=', '>=', '<=', '='];
+        this.operators = ['+', '-', '*', '/', '<', '>', '==', '!=', '>=', '<='];
         this.mathOP = ['+', '-', '*', '/'];
         this.numTypes = ['int', 'float'];
         this.charOP = ['+'];
         this.charTypes = ['char', 'string'];
+        this.logOp = ['<', '>', '==', '!=', '>=', '<='];
+        this.boolOp = ['==', '!='];
+        this.logTypes = ['bool'];
         this.cubo = new Object;
         for (var i = 0; i < this.types.length; i++) {
             this.cubo[this.types[i]] = new Object;
@@ -42,6 +45,8 @@ var cuboSemantico = /** @class */ (function () {
     cuboSemantico.prototype.setRules = function () {
         this.prepareSemanticRules(this.numTypes, this.mathOP);
         this.prepareSemanticRules(this.charTypes, this.charOP);
+        this.prepareSemanticRules(this.numTypes, this.logOp);
+        this.prepareSemanticRules(this.logTypes, this.boolOp);
     };
     cuboSemantico.prototype.printCombination = function () {
         for (var i = 0; i < this.types.length; i++) {

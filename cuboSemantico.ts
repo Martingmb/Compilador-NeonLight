@@ -1,11 +1,14 @@
 export class cuboSemantico {
 
     private types: Array<string> = ['int', 'float', 'string', 'char', 'bool'];
-    private operators: Array<string> = ['+', '-', '*', '/', '<', '>', '==', '!=', '>=', '<=', '='];
+    private operators: Array<string> = ['+', '-', '*', '/', '<', '>', '==', '!=', '>=', '<='];
     private mathOP: Array<string> = ['+', '-', '*', '/'];
     private numTypes: Array<string> = ['int', 'float'];
     private charOP: Array<string> = ['+'];
     private charTypes: Array<string> = ['char', 'string'];
+    private logOp: Array<string> = ['<', '>', '==', '!=', '>=', '<='];
+    private boolOp: Array<string> = ['==', '!=' ];
+    private logTypes: Array<string> = ['bool'];
 
     private cubo: Object;
 
@@ -48,6 +51,8 @@ export class cuboSemantico {
     setRules() {
         this.prepareSemanticRules(this.numTypes, this.mathOP);
         this.prepareSemanticRules(this.charTypes, this.charOP);
+        this.prepareSemanticRules(this.numTypes, this.logOp);
+        this.prepareSemanticRules(this.logTypes, this.boolOp);
     }
 
 
