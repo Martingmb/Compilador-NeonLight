@@ -1,4 +1,4 @@
-export class cuboSemantico {
+export default class cuboSemantico {
 
     private types: Array<string> = ['int', 'float', 'string', 'char', 'bool'];
     private operators: Array<string> = ['+', '-', '*', '/', '<', '>', '==', '!=', '>=', '<='];
