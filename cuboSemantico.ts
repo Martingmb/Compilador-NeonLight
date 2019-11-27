@@ -67,4 +67,325 @@ export default class cuboSemantico {
         }
     }
 
+    printCubo() {
+        console.log(this.cubo);
+    }
+
 }
+
+
+let test = {
+    int: {
+      int: {
+        '+': 'int',
+        '-': 'int',
+        '*': 'int',
+        '/': 'int',
+        '<': 'bool',
+        '>': 'bool',
+        '==': 'bool',
+        '!=': 'bool',
+        '>=': 'bool',
+        '<=': 'bool'
+      },
+      float: {
+        '+': 'float',
+        '-': 'float',
+        '*': 'float',
+        '/': 'float',
+        '<': 'bool',
+        '>': 'bool',
+        '==': 'bool',
+        '!=': 'bool',
+        '>=': 'bool',
+        '<=': 'bool'
+      },
+      string: {
+        '+': null,
+        '-': null,
+        '*': null,
+        '/': null,
+        '<': null,
+        '>': null,
+        '==': null,
+        '!=': null,
+        '>=': null,
+        '<=': null
+      },
+      char: {
+        '+': null,
+        '-': null,
+        '*': null,
+        '/': null,
+        '<': null,
+        '>': null,
+        '==': null,
+        '!=': null,
+        '>=': null,
+        '<=': null
+      },
+      bool: {
+        '+': null,
+        '-': null,
+        '*': null,
+        '/': null,
+        '<': null,
+        '>': null,
+        '==': null,
+        '!=': null,
+        '>=': null,
+        '<=': null
+      }
+    },
+    float: {
+      int: {
+        '+': 'float',
+        '-': 'float',
+        '*': 'float',
+        '/': 'float',
+        '<': 'bool',
+        '>': 'bool',
+        '==': 'bool',
+        '!=': 'bool',
+        '>=': 'bool',
+        '<=': 'bool'
+      },
+      float: {
+        '+': 'float',
+        '-': 'float',
+        '*': 'float',
+        '/': 'float',
+        '<': 'bool',
+        '>': 'bool',
+        '==': 'bool',
+        '!=': 'bool',
+        '>=': 'bool',
+        '<=': 'bool'
+      },
+      string: {
+        '+': null,
+        '-': null,
+        '*': null,
+        '/': null,
+        '<': null,
+        '>': null,
+        '==': null,
+        '!=': null,
+        '>=': null,
+        '<=': null
+      },
+      char: {
+        '+': null,
+        '-': null,
+        '*': null,
+        '/': null,
+        '<': null,
+        '>': null,
+        '==': null,
+        '!=': null,
+        '>=': null,
+        '<=': null
+      },
+      bool: {
+        '+': null,
+        '-': null,
+        '*': null,
+        '/': null,
+        '<': null,
+        '>': null,
+        '==': null,
+        '!=': null,
+        '>=': null,
+        '<=': null
+      }
+    },
+    string: {
+      int: {
+        '+': 'string',
+        '-': null,
+        '*': null,
+        '/': null,
+        '<': null,
+        '>': null,
+        '==': null,
+        '!=': null,
+        '>=': null,
+        '<=': null
+      },
+      float: {
+        '+': 'string',
+        '-': null,
+        '*': null,
+        '/': null,
+        '<': null,
+        '>': null,
+        '==': null,
+        '!=': null,
+        '>=': null,
+        '<=': null
+      },
+      string: {
+        '+': 'string',
+        '-': null,
+        '*': null,
+        '/': null,
+        '<': null,
+        '>': null,
+        '==': null,
+        '!=': null,
+        '>=': null,
+        '<=': null
+      },
+      char: {
+        '+': 'string',
+        '-': null,
+        '*': null,
+        '/': null,
+        '<': null,
+        '>': null,
+        '==': null,
+        '!=': null,
+        '>=': null,
+        '<=': null
+      },
+      bool: {
+        '+': null,
+        '-': null,
+        '*': null,
+        '/': null,
+        '<': null,
+        '>': null,
+        '==': null,
+        '!=': null,
+        '>=': null,
+        '<=': null
+      }
+    },
+    char: {
+      int: {
+        '+': null,
+        '-': null,
+        '*': null,
+        '/': null,
+        '<': null,
+        '>': null,
+        '==': null,
+        '!=': null,
+        '>=': null,
+        '<=': null
+      },
+      float: {
+        '+': null,
+        '-': null,
+        '*': null,
+        '/': null,
+        '<': null,
+        '>': null,
+        '==': null,
+        '!=': null,
+        '>=': null,
+        '<=': null
+      },
+      string: {
+        '+': 'string',
+        '-': null,
+        '*': null,
+        '/': null,
+        '<': null,
+        '>': null,
+        '==': null,
+        '!=': null,
+        '>=': null,
+        '<=': null
+      },
+      char: {
+        '+': 'string',
+        '-': null,
+        '*': null,
+        '/': null,
+        '<': null,
+        '>': null,
+        '==': null,
+        '!=': null,
+        '>=': null,
+        '<=': null
+      },
+      bool: {
+        '+': null,
+        '-': null,
+        '*': null,
+        '/': null,
+        '<': null,
+        '>': null,
+        '==': null,
+        '!=': null,
+        '>=': null,
+        '<=': null
+      }
+    },
+    bool: {
+      int: {
+        '+': null,
+        '-': null,
+        '*': null,
+        '/': null,
+        '<': null,
+        '>': null,
+        '==': null,
+        '!=': null,
+        '>=': null,
+        '<=': null
+      },
+      float: {
+        '+': null,
+        '-': null,
+        '*': null,
+        '/': null,
+        '<': null,
+        '>': null,
+        '==': null,
+        '!=': null,
+        '>=': null,
+        '<=': null
+      },
+      string: {
+        '+': null,
+        '-': null,
+        '*': null,
+        '/': null,
+        '<': null,
+        '>': null,
+        '==': null,
+        '!=': null,
+        '>=': null,
+        '<=': null
+      },
+      char: {
+        '+': null,
+        '-': null,
+        '*': null,
+        '/': null,
+        '<': null,
+        '>': null,
+        '==': null,
+        '!=': null,
+        '>=': null,
+        '<=': null
+      },
+      bool: {
+        '+': null,
+        '-': null,
+        '*': null,
+        '/': null,
+        '<': null,
+        '>': null,
+        '==': 'bool',
+        '!=': 'bool',
+        '>=': null,
+        '<=': null
+      }
+    }
+  }
+
+  
+  console.log(test['int']['int']['*']);

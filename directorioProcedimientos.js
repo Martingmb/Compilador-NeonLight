@@ -12,12 +12,18 @@ var directorioProcedimientos = /** @class */ (function () {
             this.tabla[fn.name] = fn;
         }
     };
+    directorioProcedimientos.prototype.getFn = function (name) {
+        return this.tabla[name];
+    };
     directorioProcedimientos.prototype.printData = function () {
         for (var key in this.tabla) {
             if (this.tabla.hasOwnProperty(key)) {
                 console.log("Funcion: ", this.tabla[key]);
             }
         }
+    };
+    directorioProcedimientos.prototype.getTablaFunciones = function () {
+        return this.tabla;
     };
     return directorioProcedimientos;
 }());

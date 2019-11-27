@@ -16,6 +16,9 @@ export class directorioProcedimientos {
         }
     }
 
+    getFn(name: string) {
+        return this.tabla[name];
+    }
 
     printData() {
         for (const key in this.tabla) {
@@ -23,6 +26,10 @@ export class directorioProcedimientos {
                 console.log("Funcion: ", this.tabla[key]);
             }
         }
+    }
+
+    getTablaFunciones() {
+        return this.tabla;
     }
 
 }

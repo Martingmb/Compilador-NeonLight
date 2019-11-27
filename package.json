@@ -1,35 +1,28 @@
 {
-  "name": "neonlight-compilador",
-  "version": "0.0.1",
-  "description": "Compilador para el lenguaje NeonLight(basado en Rust)",
-  "main": "index.js",
+  "name": "TEST-NEONLIGHT",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cuadruplos.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "jison": "^0.4.18",
+    "fs": "^0.0.1-security"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Martingmb/Compilador-NeonLight.git"
+    "url": "git+https://github.com/Martingmb/TEST-NEONLIGHT.git"
   },
-  "keywords": [
-    "Compiler",
-    "nearley",
-    "moo",
-    "grammar",
-    "language"
-  ],
-  "author": "Martin Moreno, Daniel Saldaña",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Martingmb/Compilador-NeonLight/issues"
+    "url": "https://github.com/Martingmb/TEST-NEONLIGHT/issues"
   },
-  "homepage": "https://github.com/Martingmb/Compilador-NeonLight#readme",
-  "dependencies": {
-    "moo": "^0.5.1",
-    "nearley": "^2.19.0"
-  },
-  "devDependencies": {
-    "@types/moo": "^0.5.0",
-    "@types/nearley": "^2.11.0",
-    "@types/node": "^12.7.12"
-  }
+  "homepage": "https://github.com/Martingmb/TEST-NEONLIGHT#readme"
 }
