@@ -693,4 +693,8 @@ export class maquinaVirtual {
         console.log(this.result);
     }
 
+    getResult() {
+        return this.result;
+    }
+
 }

@@ -599,6 +599,9 @@ var maquinaVirtual = /** @class */ (function () {
         }
         console.log(this.result);
     };
+    maquinaVirtual.prototype.getResult = function () {
+        return this.result;
+    };
     return maquinaVirtual;
 }());
 exports.maquinaVirtual = maquinaVirtual;
