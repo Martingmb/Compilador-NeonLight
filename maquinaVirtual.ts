@@ -446,7 +446,7 @@ export class maquinaVirtual {
                 console.log("PRINT")
                 console.log('\x1b[36m%s\x1b[34m%s\x1b[0m', c);
                 console.log(this.findType(c.result));
-                this.result += "\x1b[32m>\x1b[0m " + this.getValue(c.result, this.findType(c.result)) + "\n";
+                this.result += ">" + this.getValue(c.result, this.findType(c.result)) + "\n";
                 this.index++;
             },
             'ERA': () => {
@@ -476,13 +476,16 @@ export class maquinaVirtual {
                 console.log('\x1b[36m%s\x1b[0m', "=================================================");
             },
             '=': () => {
+                console.log('\x1b[36m%s\x1b[0m', "=================================================");
+                console.log("ASIGNACION")
                 let c = this.cuadruplos[this.index];
                 console.log('\x1b[33m%s\x1b[0m', c);
                 let dir = this.getValue(c.operandLeft, this.findType(c.operandLeft));
-                console.log('\x1b[36m%s\x1b[0m', dir);
-                let type = this.findType(dir);
-                this.saveValue(c.result, type, this.getValue(c.operandLeft, type));
+                console.log('\x1b[36m%s\x1b[0m', dir, "DIR");
+                let type = this.findType(c.operandLeft);
+                this.saveValue(c.result, type, this.getValue(c.operandLeft, this.findType(c.operandLeft)));
                 this.index++;
+                console.log('\x1b[36m%s\x1b[0m', "=================================================");
             },
             '+': () => {
                 console.log('\x1b[36m%s\x1b[0m', "=================================================");

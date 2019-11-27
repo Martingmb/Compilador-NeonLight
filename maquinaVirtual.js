@@ -357,7 +357,7 @@ var maquinaVirtual = /** @class */ (function () {
                 console.log("PRINT");
                 console.log('\x1b[36m%s\x1b[34m%s\x1b[0m', c);
                 console.log(_this.findType(c.result));
-                _this.result += "\x1b[32m>\x1b[0m " + _this.getValue(c.result, _this.findType(c.result)) + "\n";
+                _this.result += ">" + _this.getValue(c.result, _this.findType(c.result)) + "\n";
                 _this.index++;
             },
             'ERA': function () {
@@ -387,13 +387,16 @@ var maquinaVirtual = /** @class */ (function () {
                 console.log('\x1b[36m%s\x1b[0m', "=================================================");
             },
             '=': function () {
+                console.log('\x1b[36m%s\x1b[0m', "=================================================");
+                console.log("ASIGNACION");
                 var c = _this.cuadruplos[_this.index];
                 console.log('\x1b[33m%s\x1b[0m', c);
                 var dir = _this.getValue(c.operandLeft, _this.findType(c.operandLeft));
-                console.log('\x1b[36m%s\x1b[0m', dir);
-                var type = _this.findType(dir);
-                _this.saveValue(c.result, type, _this.getValue(c.operandLeft, type));
+                console.log('\x1b[36m%s\x1b[0m', dir, "DIR");
+                var type = _this.findType(c.operandLeft);
+                _this.saveValue(c.result, type, _this.getValue(c.operandLeft, _this.findType(c.operandLeft)));
                 _this.index++;
+                console.log('\x1b[36m%s\x1b[0m', "=================================================");
             },
             '+': function () {
                 console.log('\x1b[36m%s\x1b[0m', "=================================================");

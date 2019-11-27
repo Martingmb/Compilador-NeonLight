@@ -6,9 +6,6 @@ import { readFileSync } from "fs";
 
 const app = express();
 
-var bnf = readFileSync("neonlightGramatica.jison", "utf8");
-var parser = jison.Jison.Parser(bnf);
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -17,11 +14,15 @@ app.get('/test', (request, res) => {
 })
 
 app.post('/compile', (req, res) => {
+    var bnf = readFileSync("neonlightGramatica.jison", "utf8");
+    var parser = jison.Jison.Parser(bnf);
+    let data = req.body.data;
     let parsed = parser.parse(req.body.data);
-
+    let vm =new maquinaVirtual(parsed);
+    vm.processCode();
     res.status(201).json({
         message: 'Compile succesfully',
-        intercode: parsed
+        intercode: vm.getResult()
     });
 });
 

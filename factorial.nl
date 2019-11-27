@@ -8,7 +8,6 @@ fn factorial(): void {
      for(j <= 5) { 
          factorial = j * factorial;  
          j = j + 1; 
-         print("FACTORIAL"); 
          print(factorial); 
     } 
     print(factorial);  
