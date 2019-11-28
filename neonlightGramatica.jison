@@ -1174,13 +1174,21 @@ functionPS
 
 compoundStatement
 : statementList
-| localVarDeclaration
-| localVarDeclaration statementList
+| localVarDeclaration coumpoundStatement2
+;
+
+coumpoundStatement2
+: statementList
+| statementSemantico
 ;
 
 statementList
-: statement statementSemantico
-| statementList statement 
+: statement statementList2
+;
+
+statementList2
+:statementList
+| statementSemantico
 ;
 
 statementSemantico
@@ -1190,8 +1198,7 @@ statementSemantico
 ;
 
 statement
-: compoundStatement
-| functionCall
+: functionCall
 | initialConditionalStatement
 | expressionStatement
 | loopStatement
