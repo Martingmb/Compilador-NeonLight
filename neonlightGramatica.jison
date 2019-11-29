@@ -1058,6 +1058,28 @@ varDeclaration
     memoria.saveGlobal(dirGlobal, $7, null);
     tabla.insert({varName: $2, type: $7, direction: dirGlobal, size: $4});
 }
+/* |||||||||| AGREGADO |||||||||| */
+| VECTOR ID '[' ID ']' COLON type_specifier SCOLON {
+    dirGlobal = memoria.getVirtualMemoryLocationVectorGlobal($4, $7);
+    memoria.saveGlobal(dirGlobal, $7, null);
+    tabla.insert({varName: $2, type: $7, direction: dirGlobal, size: $4});
+}
+| VECTOR ID '[' ID ']' COLON type_specifier SCOLON varDeclaration {
+    dirGlobal = memoria.getVirtualMemoryLocationVectorGlobal($4, $7);
+    memoria.saveGlobal(dirGlobal, $7, null);
+    tabla.insert({varName: $2, type: $7, direction: dirGlobal, size: $4});
+}
+| VECTOR ID '[' arithmethicExpression ']' COLON type_specifier SCOLON { /* no se si jala lol */
+    dirGlobal = memoria.getVirtualMemoryLocationVectorGlobal($4, $7);
+    memoria.saveGlobal(dirGlobal, $7, null);
+    tabla.insert({varName: $2, type: $7, direction: dirGlobal, size: $4});
+}
+| VECTOR ID '[' arithmethicExpression ']' COLON type_specifier SCOLON varDeclaration { /* no se si jala lol */
+    dirGlobal = memoria.getVirtualMemoryLocationVectorGlobal($4, $7);
+    memoria.saveGlobal(dirGlobal, $7, null);
+    tabla.insert({varName: $2, type: $7, direction: dirGlobal, size: $4});
+}
+/* |||||||||||||||||||| */
 | VAR ID COLON type_specifier SCOLON { 
     dirGlobal = memoria.getVirtualMemoryLocationGlobal($4);
     memoria.saveGlobal(dirGlobal, $4, null);
@@ -1559,7 +1581,87 @@ unaryExpression
     memoria.insertConstante(direccionConst, {type: 'bool', value: $1});
     expresionSemantica.addOperando(direccionConst, 'bool');
 }
+| unaryVector
 ;
+
+/* ||||||||||||||||||| AGREGADO ||||||||||||||||||| */
+
+unaryVector
+: ID '[' NUMBER ']' {
+    if(tablaLocal.getVariable($1) || tabla.getVariable($1)) {
+        let tipo = expresionSemantica.getVariableType(tablaLocal, tabla, $1);
+        if(tabla.getVariable($1)) {
+            dirVariable = tabla.getDirection($1);
+            if(dirVariable == null) {
+                dirVariable = memoria.getVirtualMemoryLocationVectorGlobal(tipo);
+                memoria.saveGlobal(dirVariable, tipo, null);
+            }
+
+        } else {
+            dirVariable = tablaLocal.getDirection($1);
+            if(dirVariable == null){
+                dirVariable = memoria.getVirtualMemoryLocationVectorStack(tipo);
+                tablaLocal.insertDir($1, dirVariable);
+                memoria.saveStack(dirVariable, tipo, null);
+            }
+        }
+
+        expresionSemantica.addOperando(dirVariable, tipo);
+    } else {
+        throw Error(`Variable ${$1} no declarada`);
+    }
+}
+| ID '[' ID ']' {
+    if(tablaLocal.getVariable($1) || tabla.getVariable($1)) {
+        let tipo = expresionSemantica.getVariableType(tablaLocal, tabla, $1);
+        if(tabla.getVariable($1)) {
+            dirVariable = tabla.getDirection($1);
+            if(dirVariable == null) {
+                dirVariable = memoria.getVirtualMemoryLocationVectorGlobal(tipo);
+                memoria.saveGlobal(dirVariable, tipo, null);
+            }
+
+        } else {
+            dirVariable = tablaLocal.getDirection($1);
+            if(dirVariable == null){
+                dirVariable = memoria.getVirtualMemoryLocationVectorStack(tipo);
+                tablaLocal.insertDir($1, dirVariable);
+                memoria.saveStack(dirVariable, tipo, null);
+            }
+        }
+
+        expresionSemantica.addOperando(dirVariable, tipo);
+    } else {
+        throw Error(`Variable ${$1} no declarada`);
+    }
+}
+| ID '[' arithmethicExpression ']' {
+    if(tablaLocal.getVariable($1) || tabla.getVariable($1)) {
+        let tipo = expresionSemantica.getVariableType(tablaLocal, tabla, $1);
+        if(tabla.getVariable($1)) {
+            dirVariable = tabla.getDirection($1);
+            if(dirVariable == null) {
+                dirVariable = memoria.getVirtualMemoryLocationVectorGlobal(tipo);
+                memoria.saveGlobal(dirVariable, tipo, null);
+            }
+
+        } else {
+            dirVariable = tablaLocal.getDirection($1);
+            if(dirVariable == null){
+                dirVariable = memoria.getVirtualMemoryLocationVectorStack(tipo);
+                tablaLocal.insertDir($1, dirVariable);
+                memoria.saveStack(dirVariable, tipo, null);
+            }
+        }
+
+        expresionSemantica.addOperando(dirVariable, tipo);
+    } else {
+        throw Error(`Variable ${$1} no declarada`);
+    }
+}
+;
+
+/* |||||||||||||||||||||||||||||||||||||| */
 
 postfixExpression 
 : unaryExpression
